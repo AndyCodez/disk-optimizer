@@ -1,4 +1,5 @@
 require_relative '../lib/file_explorer'
+require_relative '../lib/directory'
 
 describe FileExplorer do 
 
@@ -9,6 +10,15 @@ describe FileExplorer do
 
             file_size2 = FileExplorer.parse_file_size("902345 a.txt")
             expect(file_size2).to eq(902345)
+        end
+    end
+
+    describe ".calculate_directory_size" do
+        it "returns the total size of the files in the directory" do 
+            directory = Directory.new(name: "Test dir")
+            directory.files = ["10 file1.txt", "20 file2.txt"]
+
+            expect(FileExplorer.calculate_directory_size(directory)).to eq(30)
         end
     end
 
