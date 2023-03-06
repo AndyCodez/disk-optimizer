@@ -1,9 +1,11 @@
 class Directory
     attr_accessor :name, :files
+    attr_reader :parent
 
-    def initialize(name: )
+    def initialize(name: , parent: "")
         @name = name
         @files = []
+        @parent = parent
     end
 
     def valid?

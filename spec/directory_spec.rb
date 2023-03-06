@@ -19,5 +19,11 @@ describe Directory do
         dir = Directory.new(name: "Sample directory")
         dir.files = ["file1.txt"]
     end
-        
+       
+    it "can have a parent directory" do 
+        parent_dir = Directory.new(name: "Parent directory")
+        child_dir = Directory.new(name: "Child directory", parent: parent_dir)
+
+        expect(child_dir.parent).to eq(parent_dir)
+    end
 end
