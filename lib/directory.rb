@@ -1,5 +1,5 @@
 class Directory
-    attr_accessor :name, :files
+    attr_accessor :name, :files, :size
     attr_reader :parent
 
     def initialize(name: , parent: "")
