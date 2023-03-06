@@ -1,8 +1,9 @@
 class Directory
-    attr_accessor :name
+    attr_accessor :name, :files
 
     def initialize(name: )
         @name = name
+        @files = []
     end
 
     def valid?

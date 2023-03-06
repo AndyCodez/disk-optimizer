@@ -14,5 +14,10 @@ describe Directory do
 
         
     end
+
+    it "can contain files" do
+        dir = Directory.new(name: "Sample directory")
+        dir.files = ["file1.txt"]
+    end
         
 end
