@@ -6,6 +6,7 @@ class Directory
         @name = name
         @files = []
         @parent = parent
+        @child_directories = []
     end
 
     def valid?
