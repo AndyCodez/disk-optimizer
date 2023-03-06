@@ -16,4 +16,70 @@ class FileExplorer
         size_of_files
     end
 
+    def self.get_directories(file_path, max_size)
+        
+        directories = {}
+        
+        current_directory = parent_directory = Directory.new(name: "/")
+
+        File.foreach(file_path) do |line|
+            if line.start_with?("$ cd")
+                if line.split(" ")[-1] == ".."
+                    # Go back
+                    current_directory = current_directory.parent
+                elsif line.split(" ")[-1] != "/"
+                    directory_name = line.split(" ")[-1]
+
+                    current_directory = Directory.new(name: directory_name, parent: parent_directory)
+
+                    current_directory = bfs(current_directory, directory_name)
+
+
+                    parent_directory = current_directory
+                end
+            else
+                if line.start_with?("dir")
+                    directory_name = line.split(" ")[-1]
+    
+                    new_directory = Directory.new(name: directory_name, parent: parent_directory)
+                    
+                    parent_directory.child_directories << new_directory
+                    
+                elsif line.split(" ")[0] != "$" && Integer(line.split(" ")[0])
+                    # Is a file
+                    parent_directory.files << line
+                end
+
+                size = FileExplorer.calculate_directory_size(parent_directory)
+
+                if size > 0 && size <= max_size
+                    directories[current_directory.name] = size
+                end
+            end
+        end
+
+        directories
+    end
+end
+
+def bfs(head_directory, directory_name)
+    queue = []
+
+    queue.push(head_directory)
+
+    while !queue.empty?
+        current_directory = queue.shift()
+
+        if not current_directory.visited
+            current_directory.visited = true
+
+            if current_directory.name == directory_name
+                return current_directory
+            else
+                queue.push(*current_directory.child_directories)
+            end
+        end
+    end
+
+    return -1
 end

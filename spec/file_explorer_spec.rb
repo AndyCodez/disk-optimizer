@@ -35,6 +35,31 @@ describe FileExplorer do
         end
     end
 
+    describe ".get_directories" do
+        it "returns a hash table of directories" do 
+            file_path = "spec/fixtures/sample_input.txt"
+            max_size = 100000
+
+            directories = FileExplorer.get_directories(file_path, max_size)
+        
+            expect(directories.class).to eq(Hash)
+        end
+
+        it "returns directories that are at most the set maximum size" do 
+            file_path = "spec/fixtures/sample_input.txt"
+            max_size = 100000
+
+            directories = FileExplorer.get_directories(file_path, max_size)
+        
+            expect(directories.count).to eq(2)
+
+            expect(directories.keys.first).to eq("a")
+            expect(directories.values.first).to be < max_size
+            
+            expect(directories.keys.last).to eq("e")
+            expect(directories.values.last).to be < max_size
+        end
+    end
 
 
 end
