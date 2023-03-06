@@ -26,4 +26,14 @@ describe Directory do
 
         expect(child_dir.parent).to eq(parent_dir)
     end
+
+    it "can have child directories" do 
+        parent_dir = Directory.new(name: "Parent directory")
+        child_dir1 = Directory.new(name: "Child directory", parent: parent_dir)
+        child_dir2 = Directory.new(name: "Child directory", parent: parent_dir)
+
+        parent_dir.child_directories = [child_dir1, child_dir2]
+
+        expect(parent_dir.child_directories.count).to eq(2)
+    end
 end
