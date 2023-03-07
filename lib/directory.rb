@@ -1,5 +1,5 @@
 class Directory
-  attr_accessor :name, :files, :size, :child_directories, :visited
+  attr_accessor :name, :files, :child_directories, :visited
   attr_reader :parent
 
   def initialize(name:, parent: '')
