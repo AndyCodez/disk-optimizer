@@ -1,5 +1,5 @@
-require_relative './directory'
-require_relative './file_explorer'
+require_relative 'lib/directory'
+require_relative 'lib/file_explorer'
 
 print 'Enter the maximum directory size in MB: '
 max_size = gets.chomp.to_i
