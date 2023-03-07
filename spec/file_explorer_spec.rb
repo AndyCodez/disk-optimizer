@@ -2,22 +2,22 @@ require_relative '../lib/file_explorer'
 require_relative '../lib/directory'
 
 describe FileExplorer do
-  describe '.parse_file_size' do
+  describe '.parse_size' do
     it 'returns the size of the file in integer format' do
-      file_size = FileExplorer.parse_file_size('12345 a.txt')
+      file_size = FileExplorer.parse_size('12345 a.txt')
       expect(file_size).to eq(12_345)
 
-      file_size2 = FileExplorer.parse_file_size('902345 a.txt')
+      file_size2 = FileExplorer.parse_size('902345 a.txt')
       expect(file_size2).to eq(902_345)
     end
   end
 
-  describe '.calculate_directory_size' do
+  describe '.calculate_size' do
     it 'returns the total size of the files in the directory' do
       directory = Directory.new(name: 'Test dir')
       directory.files = ['10 file1.txt', '20 file2.txt']
 
-      expect(FileExplorer.calculate_directory_size(directory)).to eq(30)
+      expect(FileExplorer.calculate_size(directory)).to eq(30)
     end
 
     it 'calculates the total size of all the direct files + nested files in the directory' do
@@ -29,7 +29,7 @@ describe FileExplorer do
 
       parent_directory.child_directories << child_directory
 
-      expect(FileExplorer.calculate_directory_size(parent_directory)).to eq(70)
+      expect(FileExplorer.calculate_size(parent_directory)).to eq(70)
     end
   end
 
