@@ -62,8 +62,6 @@ class FileExplorer
     directories.values.sum
   end
 
-  private
-
   def self.is_file?(line)
     line.split(' ')[0] != '$' && Integer(line.split(' ')[0])
   end
@@ -89,7 +87,7 @@ class FileExplorer
 
       parent_directory = current_directory
     end
-    return current_directory, parent_directory
+    [current_directory, parent_directory]
   end
 
   def self.check_directory_size(current_directory, directories, max_size, parent_directory)
