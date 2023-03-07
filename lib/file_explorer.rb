@@ -37,7 +37,7 @@ class FileExplorer
     directories
   end
 
-  def self.bfs(head_directory, directory_name)
+  def self.search_directory_bfs(head_directory, directory_name)
     queue = []
 
     queue.push(head_directory)
@@ -83,7 +83,7 @@ class FileExplorer
 
       current_directory = Directory.new(name: directory_name, parent: parent_directory)
 
-      current_directory = bfs(current_directory, directory_name)
+      current_directory = search_directory_bfs(current_directory, directory_name)
 
       parent_directory = current_directory
     end
