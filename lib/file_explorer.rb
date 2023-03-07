@@ -9,7 +9,7 @@ class FileExplorer
     file_size = directory.files.map { |file_details| FileExplorer.parse_size(file_details) }.sum
 
     directory.child_directories.each do |directory|
-        file_size += calculate_size(directory)
+      file_size += calculate_size(directory)
     end
 
     file_size
@@ -58,22 +58,26 @@ class FileExplorer
 
   def self.bfs(head_directory, directory_name)
     queue = []
-  
+
     queue.push(head_directory)
-  
+
     until queue.empty?
       current_directory = queue.shift
-  
+
       next if current_directory.visited
-  
+
       current_directory.visited = true
-  
+
       return current_directory if current_directory.name == directory_name
-  
+
       queue.push(*current_directory.child_directories)
-  
+
     end
-  
+
     -1
+  end
+
+  def self.total_size(directories: {})
+    directories.values.sum
   end
 end

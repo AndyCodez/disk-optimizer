@@ -58,4 +58,9 @@ describe FileExplorer do
       expect(directories.values.last).to be < max_size
     end
   end
+
+  it 'calculates the .total_size' do
+    dir_hash = { 'a': 10, b: 30 }
+    expect(FileExplorer.total_size(directories: dir_hash)).to eq(40)
+  end
 end
